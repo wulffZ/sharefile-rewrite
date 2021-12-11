@@ -24,7 +24,16 @@
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <div class="flex">
+                    <x-label for="password" :value="__('Password')" />
+
+                    @if (Route::has('password.request'))
+                        <a class="text-sm text-gray-100 hover:text-purple-800 transition duration-150 ease-in-out ml-auto" href="{{ route('password.request') }}">
+                            {{ __('Forgot your password?') }}
+                        </a>
+                    @endif
+
+                </div>
 
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
@@ -40,14 +49,13 @@
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-100 hover:text-purple-800 transition duration-150 ease-in-out" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
+            <div class="flex mt-4">
+                <a class="text-sm text-gray-100 hover:text-purple-800 transition duration-150 ease-in-out my-auto" href="{{ route('register') }}">
+                    {{ 'Register here!' }}
+                </a>
 
-                <x-button class="ml-3 text-gray-100">
+
+                <x-button class="ml-auto text-gray-100">
                     {{ __('Log in') }}
                 </x-button>
             </div>

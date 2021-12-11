@@ -24,4 +24,12 @@ class EmailVerificationNotificationController extends Controller
 
         return back()->with('status', 'verification-link-sent');
     }
+
+    public function fulfill(EmailVerificationRequest $request)
+    {
+        $request->fulfill();
+
+        return redirect('/home');
+    }
+
 }
