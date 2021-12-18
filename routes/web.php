@@ -9,11 +9,14 @@ use App\Http\Controllers\MusicController;
 use App\Http\Controllers\OtherController;
 use App\Http\Controllers\SoftwareController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FileController;
 
 
-// Default routes
+//
 Route::group(["middleware" => ["auth", "verified"]], function() {
     Route::get('/', [HomeController::class, "index"])->name('index');
+    Route::get('/upload/{category}', [FileController::class, "showUpload"])->name('upload.show');
+    Route::post('/upload/{category}', [FileController::class, "upload"])->name('upload');
 });
 
 // Category routes
@@ -24,6 +27,8 @@ Route::group(["prefix" => "category", "middleware" => ["auth", "verified"]], fun
     Route::get('/music', [MusicController::class, "music"])->name('category.music');
     Route::get('/other', [OtherController::class, "other"])->name('category.other');
 });
+
+// Upload routes
 
 // Email verification
 Route::get("/email/verify", [EmailVerificationPromptController::class, "prompt"])->middleware( 'auth')->name("verification.notice");
