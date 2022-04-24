@@ -14,11 +14,11 @@
         <div class="w-1/2">
         <!-- Upload component -->
         @switch($category)
-            @case("videos")
+            @case("video")
             <x-upload-videos class="mb-4"></x-upload-videos>
             @break
 
-            @case("games")
+            @case("game")
             <x-upload-games class="mb-4"></x-upload-games>
             @break
 
