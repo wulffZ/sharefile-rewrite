@@ -12,6 +12,10 @@
         <!-- Description -->
         <x-description></x-description>
 
+        <x-progress></x-progress>
+
+        <x-progress-script></x-progress-script>
+
         <!-- File -->
         <x-file-upload></x-file-upload>
     </form>
