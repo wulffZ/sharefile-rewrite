@@ -1,5 +1,5 @@
 <div class="m-4">
-    <form method="POST" action="{{ route('upload', ["category" => "videos"]) }}">
+    <form method="POST" action="{{ route('upload', ["category" => "game"]) }}">
     @csrf
         <!-- Name -->
         <div>
@@ -21,7 +21,7 @@
 
         <!-- Genre -->
         <div class="mt-4">
-            <x-label for="genre" value="Genre - Enter what genre's you would consider your game to be. Like this: adventure, rpg, open-world"/>
+            <x-label for="genre" value="Genre* - Enter what genre's you would consider your game to be. Like this: adventure, rpg, open-world"/>
 
             <x-input id="genre" class="block mt-1 w-full" type="text" name="genre" autofocus/>
         </div>

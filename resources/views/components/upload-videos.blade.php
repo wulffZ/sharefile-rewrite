@@ -1,12 +1,12 @@
 <div class="m-4">
-    <form method="POST" action="{{ route('upload', ["category" => "videos"]) }}">
+    <form method="POST" action="{{ route('upload', ["category" => "video"]) }}">
     @csrf
         <!-- Name -->
         <div>
             <h5 class="text-gray-700">* items are required</h5>
-            <x-label for="name" value="Name*"/>
+            <x-label for="title" value="Title*"/>
 
-            <x-input id="name" class="block mt-1 w-full" type="text" name="name" required autofocus/>
+            <x-input id="title" class="block mt-1 w-full" type="text" name="title" required autofocus/>
         </div>
 
         <!-- Description -->

@@ -15,6 +15,12 @@ class CreateVideosTable extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id');
+            $table->string('title');
+            $table->longText("description");
+            $table->string('file_uri');
+            $table->string('thumbnail_uri');
+            $table->string('soft_delete');
             $table->timestamps();
         });
     }
