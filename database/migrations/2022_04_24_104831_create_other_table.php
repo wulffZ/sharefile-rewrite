@@ -19,6 +19,7 @@ class CreateOtherTable extends Migration
             $table->string('title');
             $table->longText("description");
             $table->string("file_extension")->nullable();
+            $table->string('size');
             $table->string('file_uri');
             $table->string('thumbnail_uri');
             $table->string('soft_delete');

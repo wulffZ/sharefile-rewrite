@@ -19,6 +19,7 @@ class CreateMusicTable extends Migration
             $table->string('title');
             $table->string("artist");
             $table->json("genres");
+            $table->string("size");
             $table->string('file_uri');
             $table->string('thumbnail_uri');
             $table->string('soft_delete');

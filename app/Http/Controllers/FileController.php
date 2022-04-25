@@ -41,12 +41,16 @@ class FileController extends Controller
                 self::handleOther($request);
                 break;
         }
-        return $request;
     }
 
     public static function handleVideo($request)
     {
+        $request->validate([
+            'title' => 'required:max:255',
+            'description' => 'required'
+        ]);
 
+        $file = $request->file();
     }
 
     public static function handleGame($request)

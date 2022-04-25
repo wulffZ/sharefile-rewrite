@@ -18,6 +18,7 @@ class CreateVideosTable extends Migration
             $table->string('user_id');
             $table->string('title');
             $table->longText("description");
+            $table->string("size");
             $table->string('file_uri');
             $table->string('thumbnail_uri');
             $table->string('soft_delete');
