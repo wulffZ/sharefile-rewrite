@@ -139,6 +139,11 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+
+        /* Custom */
+        ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
+
+        /* Default laravel */
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -189,7 +194,10 @@ return [
     */
 
     'aliases' => [
+        /* Custom */
+        'FFMpeg' => ProtoneMedia\LaravelFFMpeg\Support\FFMpeg::class,
 
+        /* Default laravel */
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,

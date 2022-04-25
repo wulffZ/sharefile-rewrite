@@ -1,5 +1,5 @@
 <div class="m-4">
-    <form method="POST" action="{{ route('upload', ["category" => "video"]) }}">
+    <form method="POST" action="{{ route('upload', ["category" => "video"]) }}" enctype="multipart/form-data">>
     @csrf
         <!-- Name -->
         <div>

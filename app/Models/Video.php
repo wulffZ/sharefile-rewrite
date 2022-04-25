@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
+    protected $fillable = ['user_id', 'title', 'description', 'size', 'file_uri', 'thumbnail_uri' ,'soft_delete'];
+
     use HasFactory;
 }
