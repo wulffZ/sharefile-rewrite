@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Video;
-use FFMpeg\Media\Frame;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -62,7 +61,7 @@ class FileController extends Controller
 
         $size = $request->file->getSize();
 
-        $video_path = Storage::putFileAs('videos', $video, $file_uri);
+        $video_path = Storage::putFileAs('files/videos', $video, $file_uri);
         self::saveThumbnailFromVideo($video_path, $thumbnail_uri);
 
         Video::create([
