@@ -1,3 +1,5 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.js"></script>
 <script type="text/javascript">
     $(function() {
         $(document).ready(function()
@@ -16,7 +18,7 @@
                     percent.html(percentVal);
                 },
                 complete: function(xhr) {
-                    alert('File Has Been Uploaded Successfully');
+                    //todo redirect to uploaded file after file is uploaded
                 }
             });
         });
