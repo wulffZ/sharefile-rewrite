@@ -4,22 +4,19 @@
     $(function() {
         $(document).ready(function()
         {
-            var bar = $('.bar');
+            var bar = $('.progress');
             var percent = $('.percent');
             $('form').ajaxForm({
                 beforeSend: function() {
                     var percentVal = '0%';
-                    bar.width(percentVal)
-                    percent.html(percentVal);
+                    bar.attr("value", percentVal)
+                    percent.attr("value", percentVal)
                 },
                 uploadProgress: function(event, position, total, percentComplete) {
                     var percentVal = percentComplete + '%';
-                    bar.width(percentVal)
+                    bar.attr("value", percentComplete)
                     percent.html(percentVal);
                 },
-                complete: function(xhr) {
-                    //todo redirect to uploaded file after file is uploaded
-                }
             });
         });
     });

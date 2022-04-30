@@ -50,11 +50,12 @@ class FileController extends Controller
     {
         $request->validate([
             'title' => 'required:max:255',
-            'description' => 'required'
+            'description' => 'required',
+            'file' => 'required'
         ]);
 
         $uri = auth()->id() . '_' . time();
-        $file_uri = $uri . '.'. $request->file->getClientOriginalExtension();
+        $file_uri = $uri . '.'. $request->file->extension();
         $thumbnail_uri = $uri. '.png';
 
         $video = $request->file;

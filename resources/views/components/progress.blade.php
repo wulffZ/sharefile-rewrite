@@ -1,6 +1,5 @@
-<div class="mt-4">
-    <div class="progress">
-        <div class="bar"></div>
-        <div class="percent">0%</div >
-    </div>
+<div class="mt-2">
+    <x-label class="percent" for="progress" value="0%"/>
+    <progress class="progress" value="0" max="100">
+    </progress>
 </div>
