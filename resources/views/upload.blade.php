@@ -7,8 +7,8 @@
 
     <!-- Session Status -->
 
-    <div class="flex flex-col items-center">
-
+    <div class="flex flex-col pt-4 md:pt-0 w-full h-screen items-center">
+        <div class="w-full md:w-84 lg:w-1/2">
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
@@ -35,4 +35,5 @@
             @break
         @endswitch
         </div>
+    </div>
 </x-app-layout>

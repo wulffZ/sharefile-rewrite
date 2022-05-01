@@ -8,7 +8,7 @@
                 <input id="thumbail" name="thumbnail" type='file' class="hidden"/>
             </label>
         </div>
-        <div class="ml-2 w-64 border rounded">
-            <img src="https://mdbootstrap.com/img/new/slides/041.jpg" class=w-64" alt="..." />
+        <div class="hidden sm:flex w-64 ml-2 border rounded">
+            <img src="https://mdbootstrap.com/img/new/slides/041.jpg" class="object-contain" alt="preview image" />
         </div>
 </div>
