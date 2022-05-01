@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Game;
 use App\Models\Video;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use Illuminate\Http\Request;
@@ -78,7 +79,35 @@ class FileController extends Controller
 
     public static function handleGame($request)
     {
+        $request->validate([
+            'title' => 'required:max:255',
+            'description' => 'required',
+            'file' => 'required',
+            'thumbnail' => 'required'
+        ]);
 
+        $uri = auth()->id() . '_' . time();
+        $file_uri = $uri . '.'. $request->file->extension();
+        $thumbnail_uri = $uri. '.png';
+
+        $game = $request->file;
+
+        $thumbnail = $request->thumbnail;
+
+        $size = $request->file->getSize();
+
+        $game_path = Storage::putFileAs('files/games', $game, $file_uri);
+        self::saveThumbnailFromVideo($game_path, $thumbnail_uri);
+
+        Game::create([
+            'user_id' => auth()->id(),
+            'title' => $request->title,
+            'description' => $request->description,
+            'size' => $size,
+            'file_uri' => $file_uri,
+            'thumbnail_uri' => $thumbnail_uri,
+            'soft_delete' => false
+        ]);
     }
 
     public static function handleSoftware($request)

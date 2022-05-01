@@ -1,4 +1,4 @@
-<div class="m-4">
+<div class="m-4 md:w-32 lg:w-48">
     <form method="POST" action="{{ route('upload', ["category" => "game"]) }}" enctype="multipart/form-data">
     @csrf
         <!-- Name -->
@@ -11,6 +11,9 @@
 
         <!-- Description -->
         <x-description></x-description>
+
+        <!-- Thumbnail -->
+        <x-thumbnail-upload></x-thumbnail-upload>
 
         <!-- Developer / Studio -->
         <div class="mt-4">

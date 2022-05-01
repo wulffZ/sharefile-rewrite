@@ -7,11 +7,11 @@
 
     <!-- Session Status -->
 
-    <div class="min-h-screen flex flex-col items-center pt-6 sm:pt-0 bg-gray-900">
+    <div class="flex flex-col items-center">
+
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <div class="w-1/2">
         <!-- Upload component -->
         @switch($category)
             @case("video")
@@ -35,5 +35,4 @@
             @break
         @endswitch
         </div>
-    </div>
 </x-app-layout>
