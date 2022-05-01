@@ -11,11 +11,6 @@ class Category extends Model
 
     public function is_category($category)
     {
-        if(Category::where('name', $category)->exists() == false)
-        {
-            return false;
-        }
-
-        return true;
+        return Category::where('name', $category)->exists();
     }
 }
