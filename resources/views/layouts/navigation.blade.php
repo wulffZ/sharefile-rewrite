@@ -33,9 +33,11 @@
 
                 <!-- Settings Dropdown & upload-->
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
-                    <x-open-modal-button>upload</x-open-modal-button>
+                    <x-open-modal-button for="navigation_modal">upload</x-open-modal-button>
 
-                    <x-modal>
+                    <x-modal id="navigation_modal">
+                        <h3 class="text-lg font-bold">Uploading a file</h3>
+                        <p class="py-4">Select one of the 5 categories.</p>
                         <div class="flex flex-col">
                             <div class="flex flex-row space-x-4 p-2">
                                 <div class="w-1/2">
