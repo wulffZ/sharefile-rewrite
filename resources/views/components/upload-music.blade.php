@@ -23,6 +23,10 @@
             <x-input id="genre" class="block mt-1 w-full" type="text" name="genre" autofocus/>
         </div>
 
+        <x-progress></x-progress>
+
+        <x-progress-script></x-progress-script>
+
         <!-- File -->
         <x-file-upload></x-file-upload>
     </form>

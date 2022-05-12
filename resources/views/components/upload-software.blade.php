@@ -1,18 +1,11 @@
 <div class="m-4">
     <form method="POST" action="{{ route('upload', ["category" => "software"]) }}" enctype="multipart/form-data">
         @csrf
-        <!-- Name -->
-        <div>
-            <h5 class="text-gray-700">* items are required</h5>
-            <x-label for="title" value="Title*"/>
+        <!-- Name and description -->
+        <x-title-and-description></x-title-and-description>
 
-            <x-input id="title" class="block mt-1 w-full" type="text" name="title" required autofocus/>
-        </div>
-
-        <!-- Description -->
-        <x-description></x-description>
-
-        <!-- Developer -->
+        <!-- Developer / Studio -->
+        <x-modular-collapse-form heading="Developer and Type">
         <div class="mt-4">
             <x-label for="developer" value="Developer - If you care or know the developer of your software, please enter it here"/>
 
@@ -32,6 +25,11 @@
 
             <x-input id="activationkey" class="block mt-1 w-full" type="text" name="activationkey" autofocus/>
         </div>
+        </x-modular-collapse-form>
+
+        <x-progress></x-progress>
+
+        <x-progress-script></x-progress-script>
 
         <!-- File -->
         <x-file-upload></x-file-upload>

@@ -20,7 +20,7 @@
 
             {{-- Modal --}}
             <x-modal id="thumbnail_modal">
-                <img id="imagepreview" class="object-contain w-96 h-48 rounded-md border">
+                <img id="imagepreview" class="rounded-md border">
                     <div class="w-100">
                         <a class="text-gray-200 w-full p-4" onclick="displayUpload()"><h2>Upload <u>again</u></h2>(You need to close this window)</a>
                     </div>

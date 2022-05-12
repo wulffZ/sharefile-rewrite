@@ -30,7 +30,6 @@
                     </div>
                 </div>
 
-
                 <!-- Settings Dropdown & upload-->
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
                     <x-open-modal-button for="navigation_modal">upload</x-open-modal-button>
