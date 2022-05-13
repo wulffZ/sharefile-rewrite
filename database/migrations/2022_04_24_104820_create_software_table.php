@@ -19,8 +19,7 @@ class CreateSoftwareTable extends Migration
             $table->string('title');
             $table->longText("description");
             $table->string("developer")->nullable();
-            $table->json("genres");
-            $table->string("activationkey")->nullable();
+            $table->json("type")->nullable();
             $table->string("size");
             $table->string('file_uri');
             $table->string('thumbnail_uri');

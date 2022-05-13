@@ -17,6 +17,10 @@
                     bar.attr("value", percentComplete)
                     percent.html(percentVal);
                 },
+                complete: function(response) {
+                    response_json = JSON.parse(response.responseText);
+                    console.log(response_json.redirect_uri);
+                }
             });
         });
     });

@@ -19,8 +19,7 @@ class CreateGamesTable extends Migration
             $table->string('title');
             $table->longText("description");
             $table->string("developer")->nullable();
-            $table->json("genres");
-            $table->string("cdkey")->nullable();
+            $table->json("genres")->nullable();
             $table->string("size");
             $table->string('file_uri');
             $table->string('thumbnail_uri');

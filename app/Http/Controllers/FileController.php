@@ -13,36 +13,26 @@ class FileController extends Controller
 {
     public static function showUpload($category)
     {
-        if(Category::is_category($category) == false)
-        {
-            return redirect(route('index'));
-        }
-
         return view('upload', ['category' => $category]);
     }
 
     public static function upload(Request $request, $category)
     {
-        if(Category::is_category($category) == false)
-        {
-            return redirect(route('index'));
-        }
-
         switch($category) {
             case "video":
-                self::handleVideo($request);
+                return self::handleVideo($request);
                 break;
             case "game":
-                self::handleGame($request);
+                return self::handleGame($request);
                 break;
             case "software":
                 self::handleSoftware($request);
                 break;
             case "music":
-                self::handleMusic($request);
+                return self::handleMusic($request);
                 break;
             case "other":
-                self::handleOther($request);
+                return self::handleOther($request);
                 break;
         }
     }
@@ -75,6 +65,8 @@ class FileController extends Controller
             'thumbnail_uri' => $thumbnail_uri,
             'soft_delete' => false
         ]);
+
+        return reponse(["return_uri" => "uri"]);
     }
 
     public static function handleGame($request)
@@ -83,23 +75,24 @@ class FileController extends Controller
             'title' => 'required:max:255',
             'description' => 'required',
             'file' => 'required',
-            'thumbnail' => 'required'
         ]);
 
         $uri = auth()->id() . '_' . time();
-        $file_uri = $uri . '.'. $request->file->extension();
-        $thumbnail_uri = $uri. '.png';
+        $file_uri = $uri . '.' . $request->file->extension();
 
         $game = $request->file;
-
-        $thumbnail = $request->thumbnail;
 
         $size = $request->file->getSize();
 
         $game_path = Storage::putFileAs('files/games', $game, $file_uri);
-        self::saveThumbnailFromVideo($game_path, $thumbnail_uri);
 
-        Game::create([
+        if ($request->has('thumbnail')) {
+            $thumbnail = $request->thumbnail;
+            $thumbnail_uri = $uri . '.png';
+            self::saveThumbnailFromVideo($game_path, $thumbnail_uri);
+        }
+
+        $game = Game::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
@@ -108,6 +101,8 @@ class FileController extends Controller
             'thumbnail_uri' => $thumbnail_uri,
             'soft_delete' => false
         ]);
+
+        return response(["redirect_uri" => "uri"]);
     }
 
     public static function handleSoftware($request)
