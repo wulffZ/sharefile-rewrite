@@ -41,14 +41,14 @@
                             <div class="flex flex-row space-x-4 p-2">
                                 <div class="w-1/2">
                                     <x-button class="w-full">
-                                        <a href="{{ route('upload', 'video') }}">
+                                        <a href="{{ route('file.upload', ['category' => 'video']) }}">
                                             Video
                                         </a>
                                     </x-button>
                                 </div>
                                 <div class="w-1/2">
                                     <x-button class="w-full">
-                                        <a href="{{ route('upload', 'game') }}">
+                                        <a href="{{ route('file.upload', ['category' => 'game']) }}">
                                             Game
                                         </a>
                                     </x-button>
@@ -57,14 +57,14 @@
                             <div class="flex flex-row space-x-4 p-2">
                                 <div class="w-1/2">
                                     <x-button class="w-full">
-                                        <a href="{{ route('upload', 'software') }}">
+                                        <a href="{{ route('file.upload', ['category' => 'software']) }}">
                                             Software
                                         </a>
                                     </x-button>
                                 </div>
                                 <div class="w-1/2">
                                     <x-button class="w-full">
-                                        <a href="{{ route('upload', 'music') }}">
+                                        <a href="{{ route('file.upload', ['category' => 'music']) }}">
                                             Music
                                         </a>
                                     </x-button>
@@ -72,7 +72,7 @@
                             </div>
                             <div class="flex flex-row p-2">
                                 <div class="w-100">
-                                    <a class="text-gray-200 text-xs w-full"><a href="{{ route('upload', 'other') }}">Doesn't fit in categories? upload as <u>other</u></a></a>
+                                    <a class="text-gray-200 text-xs w-full"><a href="{{ route('file.upload', ['category' => 'other']) }}">Doesn't fit in categories? upload as <u>other</u></a></a>
                                 </div>
                             </div>
                         </div>

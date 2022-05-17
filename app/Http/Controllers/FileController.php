@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Game;
+use App\Models\Music;
+use App\Models\Other;
+use App\Models\Software;
 use App\Models\Video;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use Illuminate\Http\Request;
@@ -11,12 +14,35 @@ use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
-    public static function showUpload($category)
+    public static function upload($category)
     {
-        return view('upload', ['category' => $category]);
+        return view('file.upload', ['category' => $category]);
     }
 
-    public static function upload(Request $request, $category)
+    public static function showFile($category, $id)
+    {
+        switch($category) {
+            case "video":
+                $file = Video::find($id);
+                break;
+            case "game":
+                $file = Game::find($id);
+                break;
+            case "software":
+                $file = Software::find($id);
+                break;
+            case "music":
+                $file = Music::find($id);
+                break;
+            case "other":
+                $file = Other::find($id);
+                break;
+        }
+
+        return $file;
+    }
+
+    public static function uploadPost(Request $request, $category)
     {
         switch($category) {
             case "video":
@@ -56,7 +82,7 @@ class FileController extends Controller
         $video_path = Storage::putFileAs('files/videos', $video, $file_uri);
         self::saveThumbnailFromVideo($video_path, $thumbnail_uri);
 
-        Video::create([
+        $video = Video::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
@@ -66,7 +92,7 @@ class FileController extends Controller
             'soft_delete' => false
         ]);
 
-        return reponse(["return_uri" => "uri"]);
+        return response(["return_uri" => route("showFile", ["category" => "video", "id" => $video->id()])]);
     }
 
     public static function handleGame($request)
@@ -102,7 +128,7 @@ class FileController extends Controller
             'soft_delete' => false
         ]);
 
-        return response(["redirect_uri" => "uri"]);
+        return response(["redirect_uri" => route('show')]);
     }
 
     public static function handleSoftware($request)

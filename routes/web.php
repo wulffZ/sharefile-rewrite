@@ -15,12 +15,12 @@ use App\Http\Controllers\FileController;
 //
 Route::group(["middleware" => ["auth", "verified"]], function() {
     Route::get('/', [HomeController::class, "index"])->name('index');
-    Route::get('/upload/{category}', [FileController::class, "showUpload"])->name('upload.show');
-    Route::post('/upload/{category}', [FileController::class, "upload"])->name('upload');
-});
+    Route::get('/upload/{category}', [FileController::class, "upload"])->name('file.upload');
+    Route::post('/upload/{category}', [FileController::class, "uploadPost"])->name('file.uploadPost');
 
-// Category routes
-Route::group(["prefix" => "category", "middleware" => ["auth", "verified"]], function() {
+    Route::get('/{category}/{id}', [FileController::class, "show"])->name('file.show');
+
+    // Categories
     Route::get('/videos', [VideoController::class, "videos"])->name('category.videos');
     Route::get('/games', [GameController::class, "games"])->name('category.games');
     Route::get('/software', [SoftwareController::class, "software"])->name('category.software');
