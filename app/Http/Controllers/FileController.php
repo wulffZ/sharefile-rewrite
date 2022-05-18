@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Game;
 use App\Models\Music;
 use App\Models\Other;
@@ -19,7 +18,7 @@ class FileController extends Controller
         return view('file.upload', ['category' => $category]);
     }
 
-    public static function showFile($category, $id)
+    public static function show($category, $id)
     {
         switch($category) {
             case "video":
@@ -52,7 +51,7 @@ class FileController extends Controller
                 return self::handleGame($request);
                 break;
             case "software":
-                self::handleSoftware($request);
+                return self::handleSoftware($request);
                 break;
             case "music":
                 return self::handleMusic($request);
@@ -88,11 +87,11 @@ class FileController extends Controller
             'description' => $request->description,
             'size' => $size,
             'file_uri' => $file_uri,
-            'thumbnail_uri' => $thumbnail_uri,
+            'thumbnail_uri' => $thumbnail_uri ?? null,
             'soft_delete' => false
         ]);
 
-        return response(["return_uri" => route("showFile", ["category" => "video", "id" => $video->id()])]);
+        return response(["return_uri" => route("file.show", ["category" => "video", "id" => $video->id])]);
     }
 
     public static function handleGame($request)
@@ -113,27 +112,70 @@ class FileController extends Controller
         $game_path = Storage::putFileAs('files/games', $game, $file_uri);
 
         if ($request->has('thumbnail')) {
-            $thumbnail = $request->thumbnail;
             $thumbnail_uri = $uri . '.png';
-            self::saveThumbnailFromVideo($game_path, $thumbnail_uri);
+            Storage::putFileAs('public/thumbnails', $request->thumbnail, $thumbnail_uri);
+        }
+
+        if ($request->filled('genres')) {
+            $genres = explode(",", $request->genres);
+            $genres = json_encode($genres);
         }
 
         $game = Game::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
+            'developer' => $request->filled('developer') ? $request->developer : null,
+            'genres' => $request->filled('genres') ? $genres : null,
             'size' => $size,
             'file_uri' => $file_uri,
-            'thumbnail_uri' => $thumbnail_uri,
+            'thumbnail_uri' => $request->has('thumbnail') ? $thumbnail_uri : null,
             'soft_delete' => false
         ]);
 
-        return response(["redirect_uri" => route('show')]);
+        return response(["return_uri" => route("file.show", ["category" => "game", "id" => $game->id])]);
     }
 
     public static function handleSoftware($request)
     {
+        $request->validate([
+            'title' => 'required:max:255',
+            'description' => 'required',
+            'file' => 'required',
+        ]);
 
+        $uri = auth()->id() . '_' . time();
+        $file_uri = $uri . '.' . $request->file->extension();
+
+        $software = $request->file;
+
+        $size = $request->file->getSize();
+
+        $software_path = Storage::putFileAs('files/software', $software, $file_uri);
+
+        if ($request->has('thumbnail')) {
+            $thumbnail_uri = $uri . '.png';
+            Storage::putFileAs('public/thumbnails', $request->thumbnail, $thumbnail_uri);
+        }
+
+        if ($request->filled('types')) {
+            $types = explode(",", $request->types);
+            $types = json_encode($types);
+        }
+
+        $software = Software::create([
+            'user_id' => auth()->id(),
+            'title' => $request->title,
+            'description' => $request->description,
+            'developer' => $request->filled('developer') ? $request->developer : null,
+            'types' => $request->filled('types') ? $types : null,
+            'size' => $size,
+            'file_uri' => $file_uri,
+            'thumbnail_uri' => $request->has('thumbnail') ? $thumbnail_uri : null,
+            'soft_delete' => false
+        ]);
+
+        return response(["return_uri" => route("file.show", ["category" => "software", "id" => $software->id])]);
     }
 
     public static function handleMusic($request)

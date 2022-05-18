@@ -19,10 +19,10 @@ class CreateSoftwareTable extends Migration
             $table->string('title');
             $table->longText("description");
             $table->string("developer")->nullable();
-            $table->json("type")->nullable();
+            $table->json("types")->nullable();
             $table->string("size");
             $table->string('file_uri');
-            $table->string('thumbnail_uri');
+            $table->string('thumbnail_uri')->nullable();
             $table->string('soft_delete');
             $table->timestamps();
         });

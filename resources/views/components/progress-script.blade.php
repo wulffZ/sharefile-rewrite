@@ -19,7 +19,7 @@
                 },
                 complete: function(response) {
                     response_json = JSON.parse(response.responseText);
-                    console.log(response_json.redirect_uri);
+                    window.location.replace(response_json.return_uri);
                 }
             });
         });
