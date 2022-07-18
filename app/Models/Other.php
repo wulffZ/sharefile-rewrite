@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Other extends Model
 {
+    protected $fillable = ['user_id', 'title', 'description', 'size', 'file_uri' ,'soft_delete'];
+
+    protected $table = 'other';
+
     use HasFactory;
 }

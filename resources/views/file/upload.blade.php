@@ -25,25 +25,36 @@
 
                             <x-input id="title" class="block mt-1 w-full" type="text" name="title" required autofocus/>
                         </div>
+                        <div class="mt-4">
+                            <x-label for="artist"
+                                     value="Artist* - Enter the artist / group / band name here"/>
+
+                            <x-input id="artist" class="block mt-1 w-full" type="text" name="artist"
+                                     autofocus/>
+                        </div>
                     @endif
 
                     <!-- File -->
                     <x-file-upload></x-file-upload>
 
+                    <!-- Music -->
+                    @if($category == "music")
+                    <x-modular-collapse-form heading="Optional fields">
+                        <div class="w-full">
+                            <x-thumbnail-upload></x-thumbnail-upload>
+                        </div>
+                    </x-modular-collapse-form>
+                    @endif
+
                     <!-- Game -->
                     @if($category === "game")
                         <x-modular-collapse-form heading="Optional fields">
                             <div class="flex flex-row">
-                                <div class="w-1/2 p-2">
-                                    <x-label for="developer" value="Developer"/>
+                                <div class="w-full">
+                                    <x-label for="developer" value="Developer and or Studio that developed the game"/>
 
                                     <x-input id="developer" class="block mt-1 w-full" type="text" name="developer"
                                              autofocus/>
-                                </div>
-                                <div class="w-1/2 p-2">
-                                    <x-label for="genres" value="Genres, like this: adventure, rpg, open-world"/>
-
-                                    <x-input id="genres" class="block mt-1 w-full" type="text" name="genres" autofocus/>
                                 </div>
                             </div>
                             <div class="w-full">
@@ -56,42 +67,12 @@
                     @if($category === "software")
                         <x-modular-collapse-form heading="Optional fields">
                             <div class="flex flex-row">
-                                <div class="w-1/2 p-2">
+                                <div class="w-full">
                                     <x-label for="developer"
-                                             value="Developer - If you care or know the developer of your software, please enter it here"/>
+                                             value="Developer and or studio that developed the software"/>
 
                                     <x-input id="developer" class="block mt-1 w-full" type="text" name="developer"
                                              autofocus/>
-                                </div>
-                                <div class="w-1/2 p-2">
-                                    <x-label for="types"
-                                             value="Type* - Enter what type of software your file is. Like this: video editing software, crack, installer"/>
-
-                                    <x-input id="types" class="block mt-1 w-full" type="text" name="types" autofocus/>
-                                </div>
-                            </div>
-                            <div class="w-full">
-                                <x-thumbnail-upload></x-thumbnail-upload>
-                            </div>
-                        </x-modular-collapse-form>
-                    @endif
-
-                    <!-- Music -->
-                    @if($category === "music")
-                        <x-modular-collapse-form heading="Optional fields">
-                            <div class="flex flex-row">
-                                <div class="w-1/2 p-2">
-                                    <x-label for="artist"
-                                             value="Artist* - Enter the artist / group / band name here"/>
-
-                                    <x-input id="artist" class="block mt-1 w-full" type="text" name="artist"
-                                             autofocus/>
-                                </div>
-                                <div class="w-1/2 p-2">
-                                    <x-label for="genres"
-                                             value="Genre* - Enter what genre's you would consider your song to be. Like this: melodic death metal, japanese"/>
-
-                                    <x-input id="genres" class="block mt-1 w-full" type="text" name="genres" autofocus/>
                                 </div>
                             </div>
                             <div class="w-full">

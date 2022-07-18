@@ -70,13 +70,13 @@ class FileController extends Controller
             'file' => 'required'
         ]);
 
+        $video = $request->file('file');
+
         $uri = auth()->id() . '_' . time();
-        $file_uri = $uri . '.'. $request->file->extension();
+        $file_uri = $uri . '.'. $video->getClientOriginalExtension();
         $thumbnail_uri = $uri. '.png';
 
-        $video = $request->file;
-
-        $size = $request->file->getSize();
+        $size = $video->getSize();
 
         $video_path = Storage::putFileAs('files/videos', $video, $file_uri);
         self::saveThumbnailFromVideo($video_path, $thumbnail_uri);
@@ -99,26 +99,21 @@ class FileController extends Controller
         $request->validate([
             'title' => 'required:max:255',
             'description' => 'required',
-            'file' => 'required',
+            'file' => 'required'
         ]);
 
+        $game = $request->file('file');
+
         $uri = auth()->id() . '_' . time();
-        $file_uri = $uri . '.' . $request->file->extension();
+        $file_uri = $uri . '.'. $game->getClientOriginalExtension();
+        $thumbnail_uri = $uri. '.png';
 
-        $game = $request->file;
+        $size = $game->getSize();
 
-        $size = $request->file->getSize();
+        Storage::putFileAs('files/games', $game, $file_uri);
 
-        $game_path = Storage::putFileAs('files/games', $game, $file_uri);
-
-        if ($request->has('thumbnail')) {
-            $thumbnail_uri = $uri . '.png';
+        if ($request->filled('thumbnail')) {
             Storage::putFileAs('public/thumbnails', $request->thumbnail, $thumbnail_uri);
-        }
-
-        if ($request->filled('genres')) {
-            $genres = explode(",", $request->genres);
-            $genres = json_encode($genres);
         }
 
         $game = Game::create([
@@ -126,7 +121,6 @@ class FileController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'developer' => $request->filled('developer') ? $request->developer : null,
-            'genres' => $request->filled('genres') ? $genres : null,
             'size' => $size,
             'file_uri' => $file_uri,
             'thumbnail_uri' => $request->has('thumbnail') ? $thumbnail_uri : null,
@@ -144,23 +138,18 @@ class FileController extends Controller
             'file' => 'required',
         ]);
 
+        $software = $request->file('file');
+
         $uri = auth()->id() . '_' . time();
-        $file_uri = $uri . '.' . $request->file->extension();
+        $file_uri = $uri . '.'. $software->getClientOriginalExtension();
+        $thumbnail_uri = $uri . '.png';
 
-        $software = $request->file;
+        $size = $software->getSize();
 
-        $size = $request->file->getSize();
+        Storage::putFileAs('files/software', $software, $file_uri);
 
-        $software_path = Storage::putFileAs('files/software', $software, $file_uri);
-
-        if ($request->has('thumbnail')) {
-            $thumbnail_uri = $uri . '.png';
+        if ($request->filled('thumbnail')) {
             Storage::putFileAs('public/thumbnails', $request->thumbnail, $thumbnail_uri);
-        }
-
-        if ($request->filled('types')) {
-            $types = explode(",", $request->types);
-            $types = json_encode($types);
         }
 
         $software = Software::create([
@@ -168,7 +157,6 @@ class FileController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'developer' => $request->filled('developer') ? $request->developer : null,
-            'types' => $request->filled('types') ? $types : null,
             'size' => $size,
             'file_uri' => $file_uri,
             'thumbnail_uri' => $request->has('thumbnail') ? $thumbnail_uri : null,
@@ -180,12 +168,65 @@ class FileController extends Controller
 
     public static function handleMusic($request)
     {
+        $request->validate([
+            'title' => 'required:max:255',
+            'file' => 'required',
+        ]);
 
+        $music = $request->file('file');
+
+        $uri = auth()->id() . '_' . time();
+        $file_uri = $uri . '.' . $music->getClientOriginalExtension();
+        $thumbnail_uri = $uri . '.png';
+
+        $size = $music->getSize();
+
+        Storage::putFileAs('files/music', $music, $file_uri);
+
+        if ($request->filled('thumbnail')) {
+            Storage::putFileAs('public/thumbnails', $request->thumbnail, $thumbnail_uri);
+        }
+
+        $music = Music::create([
+            'user_id' => auth()->id(),
+            'title' => $request->title,
+            'artist' => $request->artist,
+            'size' => $size,
+            'file_uri' => $file_uri,
+            'thumbnail_uri' => $request->has('thumbnail') ? $thumbnail_uri : null,
+            'soft_delete' => false
+        ]);
+
+        return response(["return_uri" => route("file.show", ["category" => "music", "id" => $music->id])]);
     }
 
     public static function handleOther($request)
     {
+        $request->validate([
+            'title' => 'required:max:255',
+            'description' => 'required',
+            'file' => 'required',
+        ]);
 
+        $other = $request->file('file');
+
+        $uri = auth()->id() . '_' . time();
+        $file_uri = $uri . '.'. $other->getClientOriginalExtension();
+
+        $size = $other->getSize();
+
+        Storage::putFileAs('files/other', $other, $file_uri);
+
+        $other = Other::create([
+            'user_id' => auth()->id(),
+            'title' => $request->title,
+            'description' => $request->description,
+            'size' => $size,
+            'file_uri' => $file_uri,
+            'soft_delete' => false
+        ]);
+
+        return response(["return_uri" => route("file.show", ["category" => "other", "id" => $other->id])]);
     }
 
     private static function saveThumbnailFromVideo($video_path, $thumbnail_uri)
