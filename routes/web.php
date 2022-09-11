@@ -14,10 +14,12 @@ use App\Http\Controllers\FileController;
 
 //
 Route::group(["middleware" => ["auth", "verified"]], function() {
+    // General
     Route::get('/', [HomeController::class, "index"])->name('index');
     Route::get('/upload/{category}', [FileController::class, "upload"])->name('file.upload');
     Route::post('/upload/{category}', [FileController::class, "uploadPost"])->name('file.uploadPost');
 
+    // Show routes
     Route::get('/{category}/{id}', [FileController::class, "show"])->name('file.show');
 
     // Categories
@@ -27,8 +29,6 @@ Route::group(["middleware" => ["auth", "verified"]], function() {
     Route::get('/music', [MusicController::class, "music"])->name('category.music');
     Route::get('/other', [OtherController::class, "other"])->name('category.other');
 });
-
-// Upload routes
 
 // Email verification
 Route::get("/email/verify", [EmailVerificationPromptController::class, "prompt"])->middleware( 'auth')->name("verification.notice");

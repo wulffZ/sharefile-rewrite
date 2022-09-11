@@ -18,47 +18,44 @@ class FileController extends Controller
         return view('file.upload', ['category' => $category]);
     }
 
+    // Load views
+
     public static function show($category, $id)
     {
         switch($category) {
             case "video":
-                $file = Video::find($id);
-                break;
+                $video = Video::find($id);
             case "game":
-                $file = Game::find($id);
+                $game = Game::find($id);
                 break;
             case "software":
-                $file = Software::find($id);
+                $software = Software::find($id);
                 break;
             case "music":
-                $file = Music::find($id);
+                $music = Music::find($id);
                 break;
             case "other":
-                $file = Other::find($id);
+                $other = Other::find($id);
                 break;
         }
 
-        return $file;
     }
+
+    // Handle uploads
 
     public static function uploadPost(Request $request, $category)
     {
         switch($category) {
             case "video":
                 return self::handleVideo($request);
-                break;
             case "game":
                 return self::handleGame($request);
-                break;
             case "software":
                 return self::handleSoftware($request);
-                break;
             case "music":
                 return self::handleMusic($request);
-                break;
             case "other":
                 return self::handleOther($request);
-                break;
         }
     }
 
@@ -67,7 +64,7 @@ class FileController extends Controller
         $request->validate([
             'title' => 'required:max:255',
             'description' => 'required',
-            'file' => 'required'
+            'file' => 'required',
         ]);
 
         $video = $request->file('file');

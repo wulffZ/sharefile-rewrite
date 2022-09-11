@@ -29,5 +29,10 @@
                 {{ $slot }}
             </main>
         </div>
+        <footer class="footer footer-center p-4 bg-gray-800 text-base-content">
+            <div>
+                <p>Made with <3 by Matthijs >w< </p>
+            </div>
+        </footer>
     </body>
 </html>
