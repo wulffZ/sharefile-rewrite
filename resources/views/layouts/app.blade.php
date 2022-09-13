@@ -12,6 +12,7 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-900">
