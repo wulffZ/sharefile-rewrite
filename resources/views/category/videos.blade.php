@@ -21,13 +21,15 @@
                         <div class="flex flex-row justify-between">
                             <p><a class="underline">{{ $video->user->name }}</a></p>
                             <div class="card-actions">
-                                <x-open-modal-button for="{{ $video->id }}">PLAY</x-open-modal-button>
+                                <x-open-modal-button onclick="loadVideo({{ $video->id }})" for="{{ $video->id }}">PLAY</x-open-modal-button>
                             </div>
                         </div>
                     </div>
                     <x-modal id="{{ $video->id }}">
                         <div class="card w-full pt-6">
-                            <figure><img src="https://placeimg.com/400/225/arch" alt="car!"></figure>
+                            <video id="video_{{ $video->id }}_container" controls>
+                                <source id="video_{{ $video->id }}" src="" type="video/mp4">
+                            </video>
                             <div class="card-body">
                                 <div tabindex="0" class="collapse collapse-plus shadow rounded-box bg-gray-800">
                                     <div class="collapse-title text-xl font-medium">
@@ -83,4 +85,15 @@
             {{ $videos->links('components.pagination-links') }}
         </div>
     </div>
+    <script>
+        const loadVideo = async id => {
+            try {
+                const video = document.getElementById('video_' + id + "_container")
+                const response = await axios.get('resource/loadVideo/' + id);
+                video.src = response.data;
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    </script>
 </x-app-layout>

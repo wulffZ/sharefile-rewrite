@@ -10,6 +10,8 @@ use App\Http\Controllers\OtherController;
 use App\Http\Controllers\SoftwareController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\ResourceController;
+use Illuminate\Support\Facades\Storage;
 
 
 //
@@ -28,7 +30,17 @@ Route::group(["middleware" => ["auth", "verified"]], function() {
     Route::get('/software', [SoftwareController::class, "software"])->name('category.software');
     Route::get('/music', [MusicController::class, "music"])->name('category.music');
     Route::get('/other', [OtherController::class, "other"])->name('category.other');
+
+    // Resources on demand
+    Route::prefix('resource')->group(function () {
+        Route::get('/loadVideo/{id}', [ResourceController::class, "loadVideo"])->name('resource.load.video');
+    });
 });
+
+// Temp disk for generating temporary download paths
+Route::get('local/temp/{path}', function (string $path){
+    return Storage::disk('local')->get("files/videos/" . $path);
+})->name('local.temp');
 
 // Email verification
 Route::get("/email/verify", [EmailVerificationPromptController::class, "prompt"])->middleware( 'auth')->name("verification.notice");

@@ -11,9 +11,7 @@ class VideoController extends Controller
 {
     public function videos()
     {
-        $videos = Video::with('user')->paginate(16);
-
-//        return $videos;
+        $videos = Video::with('user')->paginate(12);
 
         return view('category.videos', ['videos' => $videos]);
     }
