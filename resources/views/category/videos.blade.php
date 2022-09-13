@@ -26,29 +26,35 @@
                         </div>
                     </div>
                     <x-modal id="{{ $video->id }}">
-                        <div class="card w-full">
+                        <div class="card w-full pt-6">
                             <figure><img src="https://placeimg.com/400/225/arch" alt="car!"></figure>
                             <div class="card-body">
-                                <div class="stats stats-vertical shadow border rounded-md text-gray-200">
-
-                                    <div class="stat bg-gray-800 ">
-                                        <div class="stat-title">Size</div>
-                                        <div class="stat-value">{{ $video->size }}</div>
-                                        <div class="stat-desc">In bytes!</div>
+                                <div tabindex="0" class="collapse collapse-plus shadow rounded-box bg-gray-800">
+                                    <div class="collapse-title text-xl font-medium">
+                                        <p class="p-3">Metadata</p>
                                     </div>
+                                    <div class="collapse-content">
+                                        <div class="stats stats-vertical w-full text-gray-200">
+                                            <div class="stat bg-gray-800">
+                                                <div class="stat-title">Size</div>
+                                                <div class="stat-value">{{ $video->size }}</div>
+                                                <div class="stat-desc">In bytes!</div>
+                                            </div>
 
-                                    <div class="stat bg-gray-800">
-                                        <div class="stat-title">Created at</div>
-                                        <div class="stat-value text-xl">{{ $video->created_at }}</div>
-                                        <div class="stat-desc">Older than your mother</div>
+                                            <div class="stat bg-gray-800">
+                                                <div class="stat-title">Created at</div>
+                                                <div class="stat-value text-xl">{{ $video->created_at }}</div>
+                                                <div class="stat-desc">Older than your mother</div>
+                                            </div>
+
+                                            <div class="stat bg-gray-800">
+                                                <div class="stat-title">Times downloaded</div>
+                                                <div class="stat-value">{{ $video->times_downloaded }}</div>
+                                                <div class="stat-desc"></div>
+                                            </div>
+
+                                        </div>
                                     </div>
-
-                                    <div class="stat bg-gray-800">
-                                        <div class="stat-title">Times downloaded</div>
-                                        <div class="stat-value">{{ $video->times_downloaded }}</div>
-                                        <div class="stat-desc"></div>
-                                    </div>
-
                                 </div>
                                 <div class="card-actions justify-end mt-2">
                                     <button class="
@@ -60,9 +66,10 @@
                                     </button>
                                     <button class="
                                        flex items-center px-4 py-2
-                    mr-2 text-gray-200 bg-red-400 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 hover:bg-opacity-25
-                   active:bg-gray-900 focus:outline-none disabled:opacity-25 transition ease-in-out duration-150">
-                                        DELETE
+                    mr-2 text-gray-200 bg-gray-800 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-purple-900 hover:bg-opacity-25
+                    active:bg-gray-900 focus:outline-none disabled:opacity-25 transition ease-in-out duration-150">
+                                        SHOW
+                                        <i class="fa-solid fa-eye ml-2"></i>
                                     </button>
                                 </div>
                             </div>
