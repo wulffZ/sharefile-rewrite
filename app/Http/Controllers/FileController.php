@@ -229,7 +229,7 @@ class FileController extends Controller
     private static function saveThumbnailFromVideo($video_path, $thumbnail_uri)
     {
         FFMpeg::open($video_path)
-            ->getFrameFromSeconds(2)
+            ->getFrameFromSeconds(0.01)
             ->export()
             ->toDisk('public')
             ->save('thumbnails/'.$thumbnail_uri);
