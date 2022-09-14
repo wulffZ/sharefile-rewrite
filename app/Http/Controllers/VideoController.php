@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Http\Resources\VideoResource;
 use App\Models\Video;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
 
 class VideoController extends Controller
 {
     public function videos()
     {
-        $videos = Video::with('user')->paginate(12);
-
-        return view('category.videos', ['videos' => $videos]);
+        return view('category.videos', [
+            'videos' => (new VideoResource(Video::with('user')->paginate(12)))->toArray(null)
+        ]);
     }
 }
