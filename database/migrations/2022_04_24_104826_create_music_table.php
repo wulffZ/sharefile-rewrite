@@ -22,6 +22,7 @@ class CreateMusicTable extends Migration
             $table->string('file_uri');
             $table->string('thumbnail_uri')->nullable();
             $table->string('soft_delete');
+            $table->integer('times_downloaded')->default(0);
             $table->timestamps();
         });
     }

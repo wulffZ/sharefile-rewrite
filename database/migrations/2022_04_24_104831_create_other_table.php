@@ -21,6 +21,7 @@ class CreateOtherTable extends Migration
             $table->string('size');
             $table->string('file_uri');
             $table->string('soft_delete');
+            $table->integer('times_downloaded')->default(0);
             $table->timestamps();
         });
     }

@@ -109,7 +109,7 @@ class FileController extends Controller
 
         Storage::putFileAs('files/games', $game, $file_uri);
 
-        if ($request->filled('thumbnail')) {
+        if ($request->has('thumbnail')) {
             Storage::putFileAs('public/thumbnails', $request->thumbnail, $thumbnail_uri);
         }
 
