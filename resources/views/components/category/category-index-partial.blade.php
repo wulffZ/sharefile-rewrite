@@ -18,6 +18,9 @@
                     <p>{{ $categoryItem['description'] }}</p>
                     <div class="flex flex-row justify-between">
                         <p><a class="underline">{{ $categoryItem['user']['name'] }}</a></p>
+                        <div class="card-actions justify-end">
+                            {{ $cardActions }}
+                        </div>
                     </div>
                 </div>
             </div>

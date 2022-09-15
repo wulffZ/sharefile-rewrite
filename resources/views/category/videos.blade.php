@@ -59,20 +59,14 @@
                                     </div>
                                 </div>
                                 <div class="card-actions justify-end mt-2">
-                                    <button class="
-                                       flex items-center px-4 py-2
-                    mr-2 text-gray-200 bg-gray-800 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-purple-900 hover:bg-opacity-25
-                    active:bg-gray-900 focus:outline-none disabled:opacity-25 transition ease-in-out duration-150">
+                                    <x-button>
                                         DOWNLOAD
                                         <i class="fa-solid fa-download ml-2"></i>
-                                    </button>
-                                    <button class="
-                                       flex items-center px-4 py-2
-                    mr-2 text-gray-200 bg-gray-800 border rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-purple-900 hover:bg-opacity-25
-                    active:bg-gray-900 focus:outline-none disabled:opacity-25 transition ease-in-out duration-150">
-                                        SHOW
+                                    </x-button>
+                                    <x-button>
+                                       SHOW
                                         <i class="fa-solid fa-eye ml-2"></i>
-                                    </button>
+                                    </x-button>
                                 </div>
                             </div>
                         </div>
