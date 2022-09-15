@@ -145,7 +145,7 @@ class FileController extends Controller
 
         Storage::putFileAs('files/software', $software, $file_uri);
 
-        if ($request->filled('thumbnail')) {
+        if ($request->has('thumbnail')) {
             Storage::putFileAs('public/thumbnails', $request->thumbnail, $thumbnail_uri);
         }
 
