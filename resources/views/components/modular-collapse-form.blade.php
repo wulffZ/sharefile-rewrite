@@ -1,5 +1,5 @@
 <div {{ $attributes }} class="collapse text-gray-100 mt-4">
-    <input type="checkbox" />
+    <input type="checkbox" class="w-full"/>
     <div class="collapse-title text-xl font-medium">
         <div class="flex items-center">
             <div>

@@ -109,7 +109,7 @@ class FileController extends Controller
 
         Storage::putFileAs('files/games', $game, $file_uri);
 
-        if ($request->has('thumbnail')) {
+        if (is_null($request->thumbnail) === false) {
             Storage::putFileAs('public/thumbnails', $request->thumbnail, $thumbnail_uri);
         }
 
@@ -117,10 +117,10 @@ class FileController extends Controller
             'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
-            'developer' => $request->filled('developer') ? $request->developer : null,
+            'developer' => is_null($request->developer) ? null : $request->developer,
             'size' => $size,
             'file_uri' => $file_uri,
-            'thumbnail_uri' => $request->has('thumbnail') ? $thumbnail_uri : null,
+            'thumbnail_uri' => is_null($request->thumbnail) ? null : $thumbnail_uri,
             'soft_delete' => false
         ]);
 
@@ -145,7 +145,7 @@ class FileController extends Controller
 
         Storage::putFileAs('files/software', $software, $file_uri);
 
-        if ($request->has('thumbnail')) {
+       if (is_null($request->thumbnail) === false) {
             Storage::putFileAs('public/thumbnails', $request->thumbnail, $thumbnail_uri);
         }
 
@@ -153,10 +153,10 @@ class FileController extends Controller
             'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
-            'developer' => $request->filled('developer') ? $request->developer : null,
+            'developer' => is_null($request->developer) ? null : $request->developer,
             'size' => $size,
             'file_uri' => $file_uri,
-            'thumbnail_uri' => $request->has('thumbnail') ? $thumbnail_uri : null,
+            'thumbnail_uri' => is_null($request->thumbnail) ? null : $thumbnail_uri,
             'soft_delete' => false
         ]);
 
@@ -180,7 +180,7 @@ class FileController extends Controller
 
         Storage::putFileAs('files/music', $music, $file_uri);
 
-        if ($request->filled('thumbnail')) {
+        if (is_null($request->thumbnail) === false) {
             Storage::putFileAs('public/thumbnails', $request->thumbnail, $thumbnail_uri);
         }
 
@@ -190,7 +190,7 @@ class FileController extends Controller
             'artist' => $request->artist,
             'size' => $size,
             'file_uri' => $file_uri,
-            'thumbnail_uri' => $request->has('thumbnail') ? $thumbnail_uri : null,
+            'thumbnail_uri' => is_null($request->thumbnail) ? null : $thumbnail_uri,
             'soft_delete' => false
         ]);
 

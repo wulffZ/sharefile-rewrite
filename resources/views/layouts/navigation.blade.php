@@ -40,33 +40,25 @@
                         <div class="flex flex-col">
                             <div class="flex flex-row space-x-4 p-2">
                                 <div class="w-1/2">
-                                    <x-button class="w-full">
-                                        <a href="{{ route('file.upload', ['category' => 'video']) }}">
+                                    <x-button class="w-full" onclick="location.href='{{ route('file.upload', ['category' => 'video']) }}'">
                                             Video
-                                        </a>
                                     </x-button>
                                 </div>
                                 <div class="w-1/2">
-                                    <x-button class="w-full">
-                                        <a href="{{ route('file.upload', ['category' => 'game']) }}">
+                                    <x-button class="w-full" onclick="location.href='{{ route('file.upload', ['category' => 'game']) }}'">
                                             Game
-                                        </a>
                                     </x-button>
                                 </div>
                             </div>
                             <div class="flex flex-row space-x-4 p-2">
                                 <div class="w-1/2">
-                                    <x-button class="w-full">
-                                        <a href="{{ route('file.upload', ['category' => 'software']) }}">
+                                    <x-button class="w-full" onclick="location.href='{{ route('file.upload', ['category' => 'software']) }}'">
                                             Software
-                                        </a>
                                     </x-button>
                                 </div>
                                 <div class="w-1/2">
-                                    <x-button class="w-full">
-                                        <a href="{{ route('file.upload', ['category' => 'music']) }}">
+                                    <x-button class="w-full" onclick="location.href='{{ route('file.upload', ['category' => 'music']) }}'">
                                             Music
-                                        </a>
                                     </x-button>
                                 </div>
                             </div>
