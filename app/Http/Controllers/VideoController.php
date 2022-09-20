@@ -9,8 +9,8 @@ class VideoController extends Controller
 {
     public function videos()
     {
-        return view('category.videos', [
-            'videos' => (new VideoResource(Video::with('user')->paginate(12)))->toArray(null)
+        return view('category.index', [
+            'categoryItems' => (new VideoResource(Video::with('user')->paginate(12)))->toArray(null), 'category' => 'videos'
         ]);
     }
 }

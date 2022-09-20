@@ -10,8 +10,8 @@ class GameController extends Controller
 {
     public function games()
     {
-        return view('category.games', [
-            'games' => (new GameResource(Game::with('user')->paginate(12)))->toArray(null)
+        return view('category.index', [
+            'categoryItems' => (new GameResource(Game::with('user')->paginate(12)))->toArray(null), 'category' => 'games'
         ]);
     }
 }

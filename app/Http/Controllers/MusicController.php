@@ -11,8 +11,8 @@ class MusicController extends Controller
 {
     public function music()
     {
-        return view('category.music', [
-            'music' => (new MusicResource(Music::with('user')->paginate(12)))->toArray(null)
+        return view('category.index', [
+            'categoryItems' => (new MusicResource(Music::with('user')->paginate(12)))->toArray(null), 'category' => 'music'
         ]);
     }
 }
