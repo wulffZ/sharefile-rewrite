@@ -8,15 +8,14 @@
                         <video class="rounded-md" controls>
                             <source src="{{ $categoryItem->temporaryUrl }}" type="video/mp4">
                         </video>
+                        @else
+                            @if(isset($item['thumbnail_uri']))
+                                <figure><img class="rounded md" src="{{ asset('/storage/thumbnails/'.$item['thumbnail_uri']) }}"/></figure>
+
+                            @else
+                                <figure><img class="rounded md" src="{{ asset('images/brand/fubuki-confused.gif') }}"/></figure>
+                            @endif
                     @endif
-
-                    @if(isset($item['thumbnail_uri']))
-                        <figure><img class="rounded md" src="{{ asset('/storage/thumbnails/'.$item['thumbnail_uri']) }}"/></figure>
-
-                    @else
-                        <figure><img class="rounded md" src="{{ asset('images/brand/fubuki-confused.gif') }}"/></figure>
-                    @endif
-
                 </div>
                 <div class="">
                     <h1 class="text-5xl font-bold">{{ $categoryItem->title }}</h1>
