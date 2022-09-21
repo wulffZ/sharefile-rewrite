@@ -30,11 +30,6 @@ Route::group(["middleware" => ["auth", "verified"]], function() {
     Route::get('/software', [SoftwareController::class, "software"])->name('category.software');
     Route::get('/music', [MusicController::class, "music"])->name('category.music');
     Route::get('/other', [OtherController::class, "other"])->name('category.other');
-
-    // Resources on demand
-    Route::prefix('resource')->group(function () {
-        Route::get('/loadVideo/{id}', [ResourceController::class, "loadVideo"])->name('resource.load.video');
-    });
 });
 
 // Temp disk for generating temporary download paths

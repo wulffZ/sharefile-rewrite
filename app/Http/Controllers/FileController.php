@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 use App\Models\Game;
 use App\Models\Music;
 use App\Models\Other;
 use App\Models\Software;
 use App\Models\Video;
-use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -23,22 +23,31 @@ class FileController extends Controller
     public static function show($category, $id)
     {
         switch($category) {
-            case "video":
-                $video = Video::find($id);
-            case "game":
-                $game = Game::find($id);
+            case "videos":
+                $categoryItem = Video::with('user')->find($id);
+                break;
+            case "games":
+                $categoryItem = Game::with('user')->find($id);
                 break;
             case "software":
-                $software = Software::find($id);
+                $categoryItem = Software::with('user')->find($id);
                 break;
             case "music":
-                $music = Music::find($id);
+                $categoryItem = Music::with('user')->find($id);
                 break;
-            case "other":
-                $other = Other::find($id);
+            case "others":
+                $categoryItem = Other::with('user')->find($id);
                 break;
+
+            default:
+                $categoryItem = null;
         }
 
+
+        $categoryItem->size = self::bytesToHuman($categoryItem->size);
+        $categoryItem->temporaryUrl = Storage::temporaryUrl($categoryItem->file_uri, now()->addHour(2));
+
+        return view('file.show', ['category' => $category, 'categoryItem' => $categoryItem]);
     }
 
     // Handle uploads
@@ -224,6 +233,17 @@ class FileController extends Controller
         ]);
 
         return response(["return_uri" => route("file.show", ["category" => "other", "id" => $other->id])]);
+    }
+
+    private static function bytesToHuman($bytes): string
+    {
+        $units = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB'];
+
+        for ($i = 0; $bytes > 1024; $i++) {
+            $bytes /= 1024;
+        }
+
+        return round($bytes, 2) . ' ' . $units[$i];
     }
 
     private static function saveThumbnailFromVideo($video_path, $thumbnail_uri)
