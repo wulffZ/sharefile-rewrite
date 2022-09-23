@@ -19,33 +19,35 @@
 
     {{-- Modal --}}
     <x-modal id="thumbnail_modal">
-        <img id="imagepreview" class="rounded-md border">
+        <img id="imagepreview" alt="preview of uploaded image" class="rounded-md border">
             <div class="w-100">
                 <a class="text-gray-200 w-full p-4" onclick="displayUpload()"><h2>Upload <u>again</u></h2>(You need to close this window)</a>
             </div>
     </x-modal>
 </div>
-<script>
-    thumbnail_upload = document.getElementById("thumbnail_upload");
-    thumbnail_preview = document.getElementById("thumbnail_preview");
+<script defer>
+    const thumbnailUploadElement  = document.querySelector("#thumbnail_upload");
+    const thumbnailPreviewElement = document.querySelector("#thumbnail_preview");
+    const imagePreviewElement     = () => document.querySelector("#imagepreview");
+    const thumbnailElement        = () => document.querySelector("#thumbnail");
 
-    thumbnail.onchange = evt =>
-    {
-        const [file] = thumbnail.files
+    const displayUpload = () => {
+        thumbnailPreviewElement.style.display = "none";
+        thumbnailUploadElement.style.display = "flex";
+    }
+
+    const  displayPreview = () => {
+        thumbnailUploadElement.style.display = "none";
+        thumbnailPreviewElement.style.display = "flex";
+    }
+
+    thumbnailElement().onchange = () => {
+        const [file] = thumbnailElement().files
         if (file) {
-            imagepreview.src = URL.createObjectURL(file);
+            imagePreviewElement().src = URL.createObjectURL(file);
 
             displayPreview();
         }
     }
-
-    function displayUpload() {
-        thumbnail_preview.style.display = "none";
-        thumbnail_upload.style.display = "flex";
-    }
-
-    function displayPreview() {
-        thumbnail_upload.style.display = "none";
-        thumbnail_preview.style.display = "flex";
-    }
 </script>
+
