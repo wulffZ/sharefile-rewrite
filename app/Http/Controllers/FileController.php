@@ -97,7 +97,7 @@ class FileController extends Controller
             'soft_delete' => false
         ]);
 
-        return response(["return_uri" => route("file.show", ["category" => "video", "id" => $video->id])]);
+        return response(["return_uri" => route("file.show", ["category" => "videos", "id" => $video->id])]);
     }
 
     public static function handleGame($request)
@@ -133,7 +133,7 @@ class FileController extends Controller
             'soft_delete' => false
         ]);
 
-        return response(["return_uri" => route("file.show", ["category" => "game", "id" => $game->id])]);
+        return response(["return_uri" => route("file.show", ["category" => "games", "id" => $game->id])]);
     }
 
     public static function handleSoftware($request)
@@ -232,7 +232,7 @@ class FileController extends Controller
             'soft_delete' => false
         ]);
 
-        return response(["return_uri" => route("file.show", ["category" => "other", "id" => $other->id])]);
+        return response(["return_uri" => route("file.show", ["category" => "others", "id" => $other->id])]);
     }
 
     private static function bytesToHuman($bytes): string

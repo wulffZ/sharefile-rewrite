@@ -20,6 +20,7 @@
                 <div class="">
                     <h1 class="text-5xl font-bold">{{ $categoryItem->title }}</h1>
                     <h1 class="text-2xl underline">{{ $categoryItem->user->name }}</h1>
+                    <h1 class="text-xs">{{ $categoryItem->created_at }}</h1>
                     <p class="py-6">{{ $categoryItem->description }}</p>
                 </div>
             </div>
@@ -38,9 +39,31 @@
                         <div class="stat-desc">Not as big as your mother!</div>
                     </div>
 
+                    <div class="stat items-center">
+                        <div class="stat-title">Status</div>
+
+                        @if($categoryItem->soft_delete == 0)
+                            <div class="stat-value">Available</div>
+                            <div class="stat-desc">Viewable, and indexable</div>
+
+                        @else
+                            <div class="stat-value">Hidden</div>
+                            <div class="stat-desc">Only direct links</div>
+                        @endif
+                    </div>
+
                     <div class="stat">
-                        <div class="stat-title">Created at</div>
-                        <div class="stat-value text-md">{{ $categoryItem->created_at }}</div>
+                        <a href="{{ $categoryItem->temporaryUrl }}" download>
+                            <x-button class="max-h-12 w-32">
+                            DOWNLOAD
+                            <i class="fa-solid fa-download ml-2"></i>
+                            </x-button>
+                        </a>
+
+                        <x-delete-button class="max-h-12 mt-2 w-32">
+                            DELETE
+                            <i class="fa-solid fa-remove ml-2"></i>
+                        </x-delete-button>
                     </div>
                 </div>
             </div>

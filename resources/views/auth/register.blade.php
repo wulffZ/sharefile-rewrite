@@ -46,7 +46,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="text-sm text-gray-100 hover:text-purple-800 transition duration-150" href="{{ route('login') }}">
+                <a class="text-sm text-gray-100 hover:text-cyan-500 transition duration-150" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
 
