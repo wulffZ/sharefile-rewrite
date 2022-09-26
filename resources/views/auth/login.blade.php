@@ -28,7 +28,7 @@
                     <x-label for="password" :value="__('Password')" />
 
                     @if (Route::has('password.request'))
-                        <a class="text-sm text-gray-100 hover:text-purple-800 transition duration-150 ease-in-out ml-auto" href="{{ route('password.request') }}">
+                        <a class="text-sm text-gray-100 hover:text-cyan-500 transition duration-150 ease-in-out ml-auto" href="{{ route('password.request') }}">
                             {{ __('Forgot your password?') }}
                         </a>
                     @endif
@@ -44,13 +44,13 @@
             <!-- Remember Me -->
             <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-purple-900 shadow-sm focus:border-indigo-300 focus:ring focus:ring-purple-700 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-100 hover:text-purple-800 transition duration-150 ease-in-out">{{ __('Remember me') }}</span>
+                    <input id="remember_me" type="checkbox" class="rounded text-blue-700 shadow-sm focus:ring-cyan-900" name="remember">
+                    <span class="ml-2 text-sm text-gray-100 hover:text-cyan-500 transition duration-150 ease-in-out">{{ __('Remember me') }}</span>
                 </label>
             </div>
 
             <div class="flex mt-4">
-                <a class="text-sm text-gray-100 hover:text-purple-800 transition duration-150 ease-in-out my-auto" href="{{ route('register') }}">
+                <a class="text-sm text-gray-100 hover:text-cyan-500 transition duration-150 ease-in-out my-auto" href="{{ route('register') }}">
                     {{ 'Register here!' }}
                 </a>
 

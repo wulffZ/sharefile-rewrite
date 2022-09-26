@@ -2,17 +2,20 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
 
 module.exports = {
-    purge: [
+    content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
+        './resources/**/*.blade.php',
+        './resources/**/*.vue',
     ],
 
     theme: {
        colors: {
-           gray: colors.trueGray,
+           gray: colors.neutral,
            red: colors.red,
-           blue: colors.lightBlue,
+           blue: colors.sky,
+           pink: colors.pink,
+           cyan: colors.cyan,
            yellow: colors.amber,
            purple: colors.purple
         },
@@ -29,5 +32,19 @@ module.exports = {
         },
     },
 
-    plugins: [require('@tailwindcss/forms')],
+    plugins: [
+        require('@tailwindcss/forms'),
+        require("daisyui"),
+    ],
+
+    daisyui: {
+        styled: true,
+        themes: true,
+        base: true,
+        utils: true,
+        logs: true,
+        rtl: false,
+        prefix: "",
+        darkTheme: "dark",
+    },
 };
